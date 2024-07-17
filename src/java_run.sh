@@ -2,6 +2,7 @@ classpath=".:/home/vstone/lib/*\
 :/home/vstone/vstonemagic/*\
 :/usr/local/share/OpenCV/java/*\
 :/home/pi/SotaPlay/lib/*\
+:/home/root/SotaPlay/lib/*\
 "
 
 OPTION="-Dfile.encoding=UTF8 -Djava.library.path=/usr/local/share/OpenCV/java/"
