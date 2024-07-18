@@ -19,6 +19,9 @@ import com.google.zxing.qrcode.QRCodeReader;
 import com.jutil.Http.HttpWrapper;
 import com.jutil.Logger.Logger;
 
+import jp.aka.sample.JSON.JSONMapper;
+import jp.aka.sample.values.GenerateReq;
+import jp.aka.sample.values.SpReqRes;
 import jp.vstone.RobotLib.*;
 import jp.vstone.camera.CameraCapture;
 /**
@@ -42,14 +45,26 @@ public class MicTest {
 		mic.waitend();
 		
 		String url = API_HOME + "/sp_rec";
-		String responce = null;
+		SpReqRes response = null;
 		try {
-			responce = HttpWrapper.uploadFile(RECPATH, url);
+			response = JSONMapper.mapper.readValue(HttpWrapper.uploadFile(RECPATH, url), SpReqRes.class);
+
+			Logger.info(TAG, response.getResponse());
+			
+			GenerateReq request_gen = new GenerateReq();
+			request_gen.setUser_message(response.getResponse());
+			
+			String url2 = API_HOME + "/generate";
+			String response_gen = null;
+			response_gen = HttpWrapper.sendJSON(JSONMapper.mapper.writeValueAsString(request_gen), url2);
+			
+
+			Logger.info(TAG, response_gen);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Logger.info(TAG, responce);
+		
 		
 		CRobotUtil.Log(TAG, "Spk Play Test");
 		//音声ファイル再生
