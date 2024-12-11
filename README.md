@@ -12,3 +12,6 @@ Sotaのクライアント側
 
 ### サーバー
 - [sota_server](https://github.com/kurocafe/sota_server)
+
+## 追記(12/11)
+なんかバグってるからそのうち消すかも
